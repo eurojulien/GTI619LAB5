@@ -29,7 +29,7 @@ public class Sessions extends Model {
   public long maximumtimeelapse;
   
   @Constraints.Required
-  public String macaddress;
+  public String superpass;
   
   @Constraints.Required
   public boolean isactive = true;

@@ -1,13 +1,9 @@
 package controllers.modelsaccess;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
-
-import org.h2.util.Task;
 
 import com.avaje.ebean.Ebean;
 
-import models.Roles;
 import models.Users;
 import models.Sessions;
 
@@ -61,7 +57,7 @@ public class Session {
 		
 		session.user 				= user;
 		session.isactive 			= true;
-		session.macaddress			= macAddress;
+		session.superpassphrase			= macAddress;
 		session.maximumtimeelapse	= timeLapsInSecond;
 		session.startdatetime		= TimeStamp.getTimeStamp();
 		session.timeStamp			= TimeStamp.getTimeStamp();

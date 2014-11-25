@@ -27,6 +27,12 @@ public class Users extends Model {
   
   @Constraints.Required
   public String lastname;
+
+  @Constraints.Required
+  public String login;
+  
+  @Constraints.Required
+  public String password;
   
   @Constraints.Required
   @Constraints.Email

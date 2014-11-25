@@ -24,8 +24,8 @@ public class Roles extends Model {
   
   public Timestamp timestamp;
   
-  public static Finder<Long,Task> find = new Finder<Long,Task>(
-    Long.class, Task.class
+  public static Finder<Long,Roles> find = new Finder<Long,Roles>(
+    Long.class, Roles.class
   );
   
 }

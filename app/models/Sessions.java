@@ -14,7 +14,7 @@ import java.sql.Timestamp;;
 
 @Entity 
 public class Sessions extends Model {
-
+	
   @Id
   @Constraints.Required
   public Long id;
@@ -36,11 +36,11 @@ public class Sessions extends Model {
   
   public Timestamp timeStamp;
   
-  public static Finder<Long,Task> find = new Finder<Long,Task>(
-    Long.class, Task.class
+  public static Finder<Long,Sessions> find = new Finder<Long,Sessions>(
+    Long.class, Sessions.class
   );
   
-  public static Finder<String,Task> findt = new Finder<String,Task>(
-    String.class, Task.class
+  public static Finder<String,Sessions> findt = new Finder<String,Sessions>(
+    String.class, Sessions.class
   );
 }

@@ -17,6 +17,7 @@ public class Application extends Controller {
             login.render(Form.form(Login.class))
         );
     }
+    
     public static Result authenticate() {
         Form<Login> loginForm = Form.form(Login.class).bindFromRequest();
         if (loginForm.hasErrors()) {
@@ -29,6 +30,26 @@ public class Application extends Controller {
             );
         }
     }
+    
+    public static Result admin() {
+        return ok(
+            admin.render(Form.form(Admin.class))
+        );
+    }
+    
+    public static Result square() {
+        return ok(
+            square.render(Form.form(Square.class))
+        );
+    }
+    
+    public static Result circle() {
+        return ok(
+            circle.render(Form.form(Circle.class))
+        );
+    }
+    
+    
     public static class Login {
 
         public String email;
@@ -42,4 +63,20 @@ public class Application extends Controller {
         }
 
     }
+    
+    public static class Admin {
+        
+        public String adminName;
+    }
+    
+    public static class Square {
+        
+        public String carre;
+    }
+    
+    public static class Circle {
+        
+        public String cercle;
+    }
+    
 }

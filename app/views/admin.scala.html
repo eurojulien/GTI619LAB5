@@ -1,0 +1,46 @@
+@(form: Form[Application.Admin])
+<html>
+    <head>
+        <title>Zentask Admin</title>
+        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/admin.css")">
+    </head>
+    <body>
+        <h1>Admin page</h1>
+        <table>
+            <tr>
+                <td><h2>Brute force option</h2></td>
+            </tr>
+            <tr>
+                <td class="rowhead" align="right">Nombre de tentative :</td>
+                <td align="left"><input size="10" name="NbTry" maxlength="2" class="rounded_text" type="text"></td>
+            </tr>
+            <tr>
+                <td class="rowhead" align="right">Délais d'attente :</td>
+                <td align="left"><input size="10" name="delay" maxlenght="3" class="rounded_text" type="text"></td>
+            </tr>
+            <tr>
+                <td class="rowhead" align="right">Bloquer accès après deux<br>
+                délais d'attente dépassé :</td>
+                <td align="left"><input type="checkbox" name="lock"></td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td><h2>Gestion mot de passe</h2></td>
+            </tr>
+            <tr>
+                <td align="right">
+                   
+                </td>
+                <td colspan="2" align="left"><input size="10" name="passwd" type="password"></td>
+            </tr>
+        </table>
+        <h2>Politique mot de passe</h2>
+            <input type="checkbox" name="option1" value="minuscule">minuscule<br>
+            <input type="checkbox" name="option2" value="majuscule">majuscule<br>
+            <input type="checkbox" name="option3" value="special">symbol spécial<br>
+            <input type="checkbox" name="option4" value="chiffre">chiffre<br>
+            <input type="text" name="lenght" value="8" size="1">Longeur du mot de passe<br>
+            Ne pas utiliser les <input type="text" name="lastpwd" value="" size="1"> dernier mot de passe<br>
+    </body>
+</html>

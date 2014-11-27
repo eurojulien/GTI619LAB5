@@ -25,79 +25,54 @@ public class Session {
 	}
 	
 	// Creation d'une nouvelle session
-	public boolean addSession(Users user, String macAddress, int timeLapsInSecond){
+	public String addSessionAndGetToken(Users user, int timeLapsInSecond){
 		
-		Sessions sessionInActivity = Ebean.find(Sessions.class)
-		.where()
-		.eq("macaddress", macAddress)
-		.findUnique();
-		
-		// La session existe deja, mais est innactive
-		if (!sessionInActivity.isactive){
-			return false;
-		}
-		
-		// La session est deja en cours sous l'ordinateur présent
-		if (sessionInActivity != null){
-			refreshSession(sessionInActivity);
-			return true;
-		}
-		
-		Sessions userSession = Ebean.find(Sessions.class)
+		List<Sessions> sessions = Ebean.find(Sessions.class)
 		.where()
 		.eq("user", user)
-		.findUnique();
+		.findList();
 		
-		// Le meme utilisateur a demandé une nouvelle session, a depuis un autre ordinateur !!!
-		if (userSession != null){
-			return false;
+		for (Sessions session : sessions){
+			session.delete();
 		}
 		
 		Sessions session = new Sessions();
 		
 		session.user 				= user;
 		session.isactive 			= true;
-		session.superpassphrase			= macAddress;
+		session.token				= Token.nextSessionId();
 		session.maximumtimeelapse	= timeLapsInSecond;
 		session.startdatetime		= TimeStamp.getTimeStamp();
 		session.timeStamp			= TimeStamp.getTimeStamp();
 		
 		session.save();
 		
-		return true;
+		return session.token;
 	}
 	
-	public void refreshSession(Sessions session){
+	public boolean checkSession_RefreshOrDelete(String token){
+		
+		Sessions session = Ebean.find(Sessions.class)
+		.where()
+		.eq("token", token)
+		.findUnique();
+		
+		// Session n'existe pas
+		if (session == null){
+			return false;
+		}
+		
+		// Session est expiree
+		Timestamp pastTime = TimeStamp.getTimeInPast(session.maximumtimeelapse);
+		
+		if(pastTime.after(session.timeStamp)){
+			session.delete();
+			return false;
+		}
+		
 		session.timeStamp = TimeStamp.getTimeStamp();
 		session.save();
-	}
-	
-	public void checkActiveStateOfAllSessions(){
 		
-		List<Sessions> sessions = Sessions.find.all();
-			
-		for (Sessions session : sessions){
-			
-			Timestamp pastTime = TimeStamp.getTimeInPast(session.maximumtimeelapse);
-			
-			if(pastTime.after(session.timeStamp)){
-				session.isactive = false;
-				session.save();
-			}
-		}
-	}
-	
-	public void deleteAllInactiveSessions(){
-
-		List<Sessions> sessions = Sessions.find.all();
-		
-		for (Sessions session : sessions){
-			
-			if(!session.isactive) session.delete();
-		}
-	}
-	
-	public boolean isSessionIsActive(Sessions session){
-		return session.isactive;
+		return true;
 	}
 }

@@ -1,7 +1,10 @@
 package controllers.modelsaccess;
+import java.security.SecureRandom;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.regex.Pattern;
 
 import org.h2.util.Task;
 
@@ -13,6 +16,12 @@ import models.Passwords;
 
 public class User {
 
+	private int PASSWORD_MIN_LENGTH = 12;
+	private String RE_PATTERN_TINY 	= "\\p{Lower}";
+	private String RE_PATTERN_CAPS 	= "\\p{Upper}";
+	private String RE_PATTERN_INT	= "\\p{Digit}";
+	private String RE_PATTERN_SPE	= "\\p{Punct}";
+	
 	private static User instance = null;
 	
 	private User(){};
@@ -102,6 +111,35 @@ public class User {
 		}
 		
 		return true;
+	}
+	
+	private boolean checkIfPasswordMeetRequirements(String password){
+		
+		// Taille doit être de 12 caractères minimum
+		if(password.length() < PASSWORD_MIN_LENGTH) return false;
+		
+		// Mot de passe doit contenir au moins une minuscule
+		if(!Pattern.matches(RE_PATTERN_TINY, password)) return false;
+		
+		// Mot de passe doit contenir au moins une majuscule
+		if(!Pattern.matches(RE_PATTERN_CAPS, password)) return false;
+				
+		// Mot de passe doit contenir au moins un chiffre
+		if(!Pattern.matches(RE_PATTERN_INT, password)) return false;
+			
+		// Mot de passe doit contenir au moins un symbole
+		if(!Pattern.matches(RE_PATTERN_SPE, password)) return false;
+				
+		return true;
+	}
+	
+	private String hashPassword(String password){
+		
+		final Random r = new SecureRandom();
+		byte[] salt = new byte[32];
+		r.nextBytes(salt);
+		
+		return null;
 	}
 	
 }

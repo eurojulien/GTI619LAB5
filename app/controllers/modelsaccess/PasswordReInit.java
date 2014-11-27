@@ -47,7 +47,7 @@ public class PasswordReInit {
 		Passwords password = new Passwords();
 		
 		password.user = user;
-		
+		password.
 		
 		return true;
 	}

@@ -24,7 +24,7 @@ create table sessions (
   id                        bigint not null,
   startdatetime             timestamp,
   maximumtimeelapse         bigint,
-  macaddress                varchar(255),
+  superpass                 varchar(255),
   isactive                  boolean,
   time_stamp                timestamp,
   constraint pk_sessions primary key (id))
@@ -34,6 +34,8 @@ create table users (
   id                        bigint not null,
   firstname                 varchar(255),
   lastname                  varchar(255),
+  login                     varchar(255),
+  password                  varchar(255),
   email                     varchar(255),
   isactive                  boolean,
   timestamp                 timestamp,

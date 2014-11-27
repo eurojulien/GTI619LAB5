@@ -5,5 +5,18 @@
 # Home page
 GET     /                           controllers.Application.index()
 
+# Login page
+GET     /login                  	controllers.Application.login()
+POST    /login                      controllers.Application.authenticate()
+
+# Admin page
+GET     /admin                      controllers.Application.admin()
+
+#Square page
+GET     /square                     controllers.Application.square()
+
+#Circle page
+GET     /circle                     controllers.Application.circle()
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

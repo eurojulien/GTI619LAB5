@@ -40,7 +40,11 @@ public class Session {
 		
 		session.user 				= user;
 		session.isactive 			= true;
+<<<<<<< HEAD
 		session.token				= Token.nextSessionId();
+=======
+		//session.superpassphrase		= macAddress;
+>>>>>>> 15dafd90c90df441b28ef22d725621bd11641b93
 		session.maximumtimeelapse	= timeLapsInSecond;
 		session.startdatetime		= TimeStamp.getTimeStamp();
 		session.timeStamp			= TimeStamp.getTimeStamp();

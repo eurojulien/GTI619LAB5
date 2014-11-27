@@ -1,0 +1,42 @@
+@(form: Form[Application.Login])
+<html>
+    <head>
+        <title>Authentication</title>
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/login.css")">
+    </head>
+    
+    <body>
+    @helper.form(routes.Application.authenticate) {
+@if(form.hasGlobalErrors) {
+    <p class="error">
+        @form.globalError.message
+    </p>
+}
+    <p>
+    <table width="500" cellpadding="5" border="0">
+        <tr>
+            <td align="center"><h1>Sign in</h1></td>
+        </tr>
+        <tr>
+            <td class="rowhead">Nom d'utilisateur:</td>
+            <td colspan="2" align="left">
+                <input size="30" name="username" maxlength="25" class="rounded_text" type="text">
+            </td>
+        </tr>
+        <tr>
+            <td class="rowhead">Mot de passe:</td>
+            <td colspan="2" align="left">
+                <input size="30" name="password" maxlength="40" class="rounded_text" type="password">
+            </td>
+        </tr>  
+        <tr>
+            <td colspan="3" align="center">
+                <input value="Log in!" class="rounded_big_button" id="submitButton" type="submit">
+            </td>
+        </tr>
+    </table>
+    </p>
+}
+    </body>
+</html>
